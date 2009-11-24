@@ -1,0 +1,35 @@
+<h2>Create a Workshop</h2>
+
+<p>Enter in all the shit and you're golden.</p>
+
+<% if @preview %>
+<h2><%= @workshop.name %></h2>
+
+<%= @workshop.description(true) %>
+
+<hr style="display: block;" />
+<% end %>
+
+<div class="form_container">
+
+  <% if @workshop.errors.count > 0 %>
+    <div class="error">
+      <ul>
+      <% @workshop.errors.each do |error| %>
+        <li><%= "#{error[0]} #{error[1]}"%></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% form_tag '/workshops/create' do %>
+    <%= render :partial => 'workshop' %>
+    <div class="form_row">
+      <div class="form_label"></div>
+      <div class="form_field">
+        <%= submit_tag 'Save' %> <%= submit_tag 'Preview', { :name => 'preview' } %> <span>or <%= link_to "Cancel", { :controller => 'admin' } %></span>
+      </div>
+    </div>
+  <% end %>
+
+</div>

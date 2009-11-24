@@ -1,0 +1,87 @@
+<div id="current_user">
+  <% if session[:user] %>
+    Welcome back, <%= session[:user].first_name %>. If that's not you, please <%= link_to "log out", :controller => 'students', :action => 'logout' %>.
+  <% else %>
+    If you would like, you may <%= link_to "log into your account", :controller => 'students', :action => 'login' %> now.
+  <% end %>
+</div>
+
+<div id="intro">
+
+  <p>Art Photo Workshops combines a <span class="hi">travel exploration experience</span> with hands-on <span class="hi">art photography instruction</span>. We work with you in the field to develop your design and composition skills, guide your discovery of beautiful natural and urban locations, and lead critique of the images you create.</p>
+    
+  <p>We take care of all the planning; all you have to do is open yourself to an artistic experience that will <span class="hi">change the way you see the world</span>.</p>
+
+</div>
+
+<p><em>Select a workshop below to read more about it and then register online. It couldn't be easier!</em></p>
+
+<div id="top_contact">
+  Questions? Comments? We'd love to hear from you. <a href="mailto:info@artphotoworkshops.com">E-mail us</a>!
+</div>
+
+<div id="twitter_div">
+  <a href="http://twitter.com/apworkshops" id="twitter_link">Follow us!</a>
+  <ul id="twitter_update_list"></ul>
+</div>
+
+<% if not @workshops.empty? %>
+  <% @workshops.each do |workshop| %>
+    <div class="ws_row" >
+      <div class="ws_title_row">
+        <div class="ws_title">
+          <%= link_to workshop.name, {
+              :controller => 'register',
+              :action => 'view',
+              :year => workshop.start_date.year,
+              :month => Date::MONTHNAMES[workshop.start_date.month],
+              :ident => workshop.short_name } %>
+        </div>
+        <div class="ws_date">
+          <%= workshop.date_range %>
+        </div>
+      </div>
+      <div class="ws_info_row">
+        <div class="ws_specs_row">
+          LENGTH: <%= workshop.length %> day<%= (workshop.length > 1) ? 's' : '' %>
+          &nbsp;&nbsp;<img style="vertical-align: middle;" src="/images/cross.gif" alt="" />&nbsp;&nbsp;
+          MAX. STUDENTS: <%= workshop.max_students %>
+          &nbsp;&nbsp;<img style="vertical-align: middle;" src="/images/cross.gif" alt="" />&nbsp;&nbsp;
+          COST: $<%= sprintf("%01.2f", workshop.cost) %>
+        </div>
+        <div class="ws_pic">
+          <%= link_to workshop.thumbnail, {
+              :controller => 'register',
+              :action => 'view',
+              :year => workshop.start_date.year,
+              :month => Date::MONTHNAMES[workshop.start_date.month],
+              :ident => workshop.short_name } %>
+        </div>
+        <div class="ws_desc">
+          <%= workshop.short_desc(true) %>
+
+          <% if workshop.full %><p style="color: #C45931;"><strong>Sorry, this workshop is full!</strong></p><% end %>
+            
+          <% if !workshop.active %><p style="color: #C45931;"><img src="/images/page_cross.gif" alt="X" style="vertical-align: top;" /> <strong>This workshop is NOT ACTIVE.</strong></p><% end %>
+
+          <% if @admin %><p><%= link_to "<img src=\"/images/page_edit.gif\" style=\"vertical-align: top;\" alt=\"\" /> Edit", { :controller => 'workshops', :action => 'edit', :id => workshop.id } %></p><% end %>
+
+          <p><%= link_to "<img src=\"/images/learn_more.gif\" alt=\"LEARN MORE AND SIGN UP!\" />", {
+              :controller => 'register',
+              :action => 'view',
+              :year => workshop.start_date.year,
+              :month => Date::MONTHNAMES[workshop.start_date.month],
+              :ident => workshop.short_name } %>
+          </p>
+        </div>
+      </div>
+      <div style="clear:both;font-size:1px;height:1px;">&nbsp;</div>
+    </div>
+  <% end %>
+  <br />
+<% else %>
+  <p>Sorry! There aren't any workshops coming up right now, but stay tuned and we'll keep you updated.</p>
+<% end %>
+
+<script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>
+<script type="text/javascript" src="http://twitter.com/statuses/user_timeline/apworkshops.json?callback=twitterCallback2&amp;count=1"></script>

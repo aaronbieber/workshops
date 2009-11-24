@@ -1,0 +1,31 @@
+<h2>Log In</h2>
+
+<p>Sorry, our security isn't <strong>that</strong> weak.</p>
+
+<div class="form_container">
+  <% if flash[:error] %>
+    <div class="error">
+      <p><%= flash[:error] %></p>
+    </div>
+  <% end %>
+  
+  <% form_tag '/admin/login' do %>
+    <div class="form_row">
+      <div class="form_label">
+        <label for="administrator_email">Email:</label>
+      </div>
+      <div class="form_field">
+        <%= text_field_tag 'email', @email, { :size => 40, :class => 'field' } %>
+      </div>
+    </div>
+    <div class="form_row">
+      <div class="form_label">
+        <label for="administrator_password">Password:</label>
+      </div>
+      <div class="form_field">
+        <%= password_field_tag 'pass', '', { :size => 40, :class => 'field' } %>
+      </div>
+    </div>
+    <%= submit_tag 'Log In' %>
+  <% end %>
+</div>

@@ -1,0 +1,27 @@
+<div class="form_row">
+  <div class="form_label">
+    <label for="page_title">Title:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'page', 'title', { :size => 40, :class => 'field', :maxlength => 128 } %>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="page_name">Name:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'page', 'name', { :size => 40, :class => 'field', :maxlength => 128 } %>
+    <p>No spaces! UseCamelCase.</p>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="page_text">Text:</label>
+  </div>
+  <div class="form_field">
+    <%= text_area 'page', 'text', { :rows => 20, :cols => 80, :class => 'field' } %>
+  </div>
+</div>

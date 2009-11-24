@@ -1,0 +1,40 @@
+<% if @preview %>
+<h2><%= @workshop.name %></h2>
+
+<%= @workshop.description(true) %>
+
+<hr style="display: block;" />
+<% end %>
+<h2>Edit <%= @workshop.name %></h2>
+
+<p>Enter in all the shit and you're golden.</p>
+
+<div class="form_container">
+
+  <% if @workshop.errors.count > 0 %>
+    <div class="error">
+      <ul>
+      <% @workshop.errors.each do |error| %>
+        <li><%= "#{error[0]} #{error[1]}"%></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if @workshop.ancestor %>
+    <p>This workshop is inheriting empty local fields from workshop <%= @workshop.ancestor.id %>, "<%= @workshop.ancestor.name %>"</p>
+  <% end %>
+
+  <% form_tag '/workshops/edit' do %>
+    <%= hidden_field_tag 'ancestor', @workshop.ancestor_id %>
+    <%= hidden_field_tag 'id', @workshop.id %>
+    <%= render :partial => 'workshop' %>
+    <div class="form_row">
+      <div class="form_label"></div>
+      <div class="form_field">
+        <%= submit_tag 'Save' %> <%= submit_tag 'Preview', { :name => 'preview' } %> <span>or <%= link_to "Cancel", { :controller => 'admin' } %></span>
+      </div>
+    </div>
+  <% end %>
+
+</div>

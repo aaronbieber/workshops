@@ -1,0 +1,30 @@
+<h2><%= @workshop.name %> Workshop Registration</h2>
+
+<h3>First, the basics:</h3>
+
+<p>We swear on our precious magnesium camera bodies that none of the following information will be distributed, sold, published, or looked at sideways. Ever.</p>
+
+<h3>Cost</h3>
+
+<p>The cost of this workshop is <%= number_to_currency(@workshop.cost) %>. You'll be asked to send us your payment via snail mail or over the Internet (through PayPal, etc.) after you've registered. Your seat in the workshop will <strong>not be reserved</strong> until payment is received.</p>
+
+<div class="form_container">
+
+  <% if @student.errors.count > 0 %>
+    <div class="error">
+      <p>The fields in red are required or their content isn't valid. Make sure you've entered a proper e-mail address and supplied information for all fields.</p>
+      <ul>
+      <% @student.errors.each do |error| %>
+        <li><%= "#{error[0]} #{error[1]}"%></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <% form_tag "/register/create" do %>
+    <%= render :partial => 'form' %>
+    <%= hidden_field_tag 'workshop', @workshop.id %>
+    <div class="form_row"><div class="form_label">&nbsp;</div><div class="form_field"><%= submit_tag "Register" %></div></div>
+  <% end %>
+
+</div>

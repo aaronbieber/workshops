@@ -1,0 +1,5 @@
+<h2>Thanks for registering!</h2>
+
+<p>You're registered for the <%= @workshop.name %> Workshop in <%= @workshop.month%>, <%= @workshop.year %>, <strong>but you're not done yet</strong>! Either Chris or Aaron will be in touch with you shortly to talk about payment and answer any questions you may have. You will also receive a confirmation e-mail in a moment containing more information about our workshops and what to do next.</p>
+
+<p>Thanks again for signing up! From here, <%= link_to "head back home", { :controller => 'upcoming', :action => 'view' } %>.</p>

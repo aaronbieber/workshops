@@ -1,0 +1,109 @@
+<div class="form_row">
+  <div class="form_label">
+    <label for="workshop_active">Active:</label>
+  </div>
+  <div class="form_field">
+    <%= check_box 'workshop', 'active' %>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="workshop_full">Full:</label>
+  </div>
+  <div class="form_field">
+    <%= check_box 'workshop', 'full' %>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="workshop_name">Display Name:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'workshop', 'name', { :size => 40, :class => 'field' } %>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="workshop_short_name">Short Name:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'workshop', 'short_name', { :size => 40, :class => 'field' } %>
+    <p>No spaces! UseCamelCase.</p>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="workshop_cutoff_date">Cutoff Date:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'workshop', 'cutoff_date', { :size => 12, :class => 'field' } %>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="workshop_start_date">Start Date:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'workshop', 'start_date', { :size => 12, :class => 'field' } %>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="workshop_end_date">End Date:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'workshop', 'end_date', { :size => 12, :class => 'field' } %>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="workshop_max_students">Max Students:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'workshop', 'max_students', { :size => 2, :class => 'field' } %>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="workshop_cost">Cost:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'workshop', 'cost', { :size => 10, :class => 'field' } %>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="workshop_thumbnail">Thumbnail:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'workshop', 'thumbnail', { :size => 80, :class => 'field', :style => "font-size: 1.3em;" } %>
+    <p style="font-size: 1.3em;">Regular URL starting with 'http://' or Air's gallery path like '/Places/DeathValley/Tendrils.jpg'</p>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="workshop_description">Description:</label>
+  </div>
+  <div class="form_field">
+    <%= text_area 'workshop', 'description', { :rows => 20, :cols => 80, :class => 'field' } %>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="workshop_short_desc">Short Desc.:</label>
+  </div>
+  <div class="form_field">
+    <%= text_area 'workshop', 'short_desc', { :rows => 10, :cols => 80, :class => 'field' } %>
+  </div>
+</div>

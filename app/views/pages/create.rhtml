@@ -1,0 +1,27 @@
+<h2>Create a Page</h2>
+
+<p>Enter in all the shit and you're golden.</p>
+
+<div class="form_container">
+
+  <% if @page.errors.count > 0 %>
+    <div class="error">
+      <ul>
+      <% @page.errors.each do |error| %>
+        <li><%= "#{error[0]} #{error[1]}"%></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% form_tag '/pages/create' do %>
+    <%= render :partial => 'page' %>
+    <div class="form_row">
+      <div class="form_label"></div>
+      <div class="form_field">
+        <%= submit_tag 'Save' %> <span>or <%= link_to "Cancel", { :controller => 'admin', :action => 'index' } %></span>
+      </div>
+    </div>
+  <% end %>
+
+</div>

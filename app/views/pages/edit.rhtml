@@ -1,0 +1,36 @@
+<% if @preview %>
+<h2><%= @page.title %></h2>
+
+<%= @page.text(true) %>
+
+<hr style="display: block;" />
+<% end %>
+
+<h2>Edit <%= @page.name %></h2>
+
+<p>Enter in all the shit and you're golden.</p>
+
+<div class="form_container">
+
+  <% if @page.errors.count > 0 %>
+    <div class="error">
+      <ul>
+      <% @page.errors.each do |error| %>
+        <li><%= "#{error[0]} #{error[1]}"%></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% form_tag '/pages/edit' do %>
+    <%= hidden_field_tag 'id', @page.id %>
+    <%= render :partial => 'page' %>
+    <div class="form_row">
+      <div class="form_label"></div>
+      <div class="form_field">
+        <%= submit_tag 'Save' %> <%= submit_tag 'Preview', { :name => 'preview' } %> <span>or <%= link_to "Cancel", { :controller => 'admin', :action => 'index' } %></span>
+      </div>
+    </div>
+  <% end %>
+
+</div>

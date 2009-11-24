@@ -1,0 +1,68 @@
+<% if not session[:user] %>
+
+  <h2>Log In</h2>
+
+  <p>If you'll just confirm your login below, you'll be on your way.</p>
+
+  <div class="form_container">
+
+    <% if flash[:error] %>
+      <div class="error">
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end %>
+
+    <% #form_tag "/#{@workshop.year}/#{@workshop.month}/#{@workshop.ident}/login" do %>
+    <% form_tag "/do/register/login" do %>
+    <% if @workshop %><%= hidden_field_tag 'workshop', @workshop.id %><% end %>
+      <div class="form_row">
+        <div class="form_label">
+          <label for="student_email">Email:</label>
+        </div>
+        <div class="form_field">
+          <input type="text" name="student_email" size="30" class="field" value="<%= @email %>" />
+        </div>
+      </div>
+      <div class="form_row">
+        <div class="form_label">
+          <label for="student_password">Password:</label>
+        </div>
+        <div class="form_field">
+          <input type="password" name="student_password" size="30" class="field" />
+        </div>
+      </div>
+      <div class="form_row"><div class="form_label">&nbsp;</div><div class="form_field"><%= submit_tag "Log In" %></div></div>
+    <% end %>
+  </div>
+
+<% else %>
+
+  <h2>Welcome back!</h2>
+
+  <p>It's nice to see you again, <%= @student.first_name %>.</p>
+
+  <p>You are about to register for "<%= @workshop.name %>." Please make sure that all of the information below is correct, and then click "Update and Register" to save your registration.</p>
+
+  <div class="form_container">
+
+    <% if @student.errors.count > 0 %>
+      <div class="error">
+        <p>The fields in red are required or their content isn't valid. Make sure you've entered a proper e-mail address and supplied information for all fields.</p>
+        <ul>
+        <% @student.errors.each do |error| %>
+          <li><%= "#{error[0]} #{error[1]}"%></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    <% form_tag "/register/update" do %>
+      <%= render :partial => 'form' %>
+      <%= hidden_field_tag 'workshop', nil, :value => @workshop.id %>
+      <%= hidden_field_tag 'sid', nil, :value => @student.id %>
+      <div class="form_row"><div class="form_label">&nbsp;</div><div class="form_field"><%= submit_tag "Update and Register" %></div></div>
+    <% end %>
+
+  </div>
+
+<% end %>

@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <%= stylesheet_link_tag 'style' %>
+  <%= javascript_include_tag 'prototype' %>
+  <%= javascript_include_tag 'effects' %>
+  <%= javascript_include_tag 'application' %>
+
+	<title>Administration</title>
+	
+</head>
+
+<body id="ssp">
+
+  <div id="heading">
+    <h1>
+      <%= link_to "<span>Administration</span>", { :controller => 'upcoming', :action => 'view' } %>
+    </h1>
+  </div>
+
+  <!-- <div id="siteLinks">
+    <div id="siteLinksPad">
+      <a href="http://www.fisheyegallery.com">Visit Aaron's Gallery</a>
+      &bull;
+      <a href="http://www.curiouslens.com">Visit Chris's Gallery</a>
+    </div>
+  </div> -->
+
+  <div id="airContentTop"></div>
+  <div id="airContent">
+    <%= yield %>
+  </div>
+  <div id="airContentBottom"></div>
+
+  <div id="copyright">
+    This entire site, images, content, etc., are copyrighted. &copy; 2007 All Rights Reserved.
+  </div>
+
+</body>
+</html>

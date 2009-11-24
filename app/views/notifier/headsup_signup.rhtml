@@ -1,0 +1,9 @@
+There is a new workshop signup for <%= @workshop_name %>!
+
+   Name: <%= @user.first_name %> <%= @user.last_name %>
+  Email: <%= @user.email %>
+  Phone: <%= @user.phone %> <% if not @user.ext.blank? %><%= @user.ext %><% end %>
+
+Address: <%= @user.address1 %><% if not @user.address2.blank? %>
+         <%= @user.address2 %><% end %>
+         <%= @user.city %>, <%= @user.state %> <%= @user.zip %>

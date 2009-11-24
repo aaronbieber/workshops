@@ -1,0 +1,63 @@
+<h2>Administration</h2>
+
+<p>Here, you can administer things.</p>
+
+<h3>Students</h3>
+
+<% if not @workshop.nil? %>
+  <p>These students are registered for <%= @workshop.name %>.</p>
+<% end %>
+
+<p>
+  <img src="/images/icon_home.gif" alt="Home" />&nbsp;<%= link_to "Go back to the main page", { :controller => 'admin', :action => nil } %><br />
+  <img src="/images/fffm/icon_download.gif" alt="Export" />&nbsp;<%= link_to "Export all to CSV", { :action => 'export', :id => params[:id] } %>
+  <% if not @workshop.nil? %>
+    (<%= link_to "Only paid", { :action => 'export', :id => params[:id], :type => 'paid' } %>
+    |
+    <%= link_to "Only unpaid", { :action => 'export', :id => params[:id], :type => 'unpaid' } %>)
+  <% end %>
+</p>
+
+<% if @students.size > 0 %>
+  <table class="data" cellspacing="0" cellpadding="0">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>E-mail</th>
+      <th>Phone</th>
+      <% if not @workshop.nil? %>
+        <th>Paid</th>
+        <th>&nbsp;</th>
+      <% end %>
+      <th>&nbsp;</th>
+    </tr>
+    
+    <% @students.each do |student| %>
+      <tr>
+        <td><%= student.first_name %></td>
+        <td><%= student.last_name %></td>
+        <td><a href="mailto:<%= student.email %>"><%= student.email %></a></td>
+        <td><%= student.phone %></td>
+        <% if not @workshop.nil? %>
+          <td>
+            <% if student.paid(@workshop) %>
+              <%= link_to "<img src=\"/images/flag_green.gif\" alt=\"Paid\" />", { :action => 'unpaid', :id => student.id, :workshop => @workshop.id }, :title => 'Mark Unpaid' %>
+            <% else %>
+            <%= link_to "<img src=\"/images/flag_red.gif\" alt=\"Hasn't Paid!\" />", { :action => 'paid', :id => student.id, :workshop => @workshop.id }, :title => 'Mark Paid' %>
+            <% end %>
+          </td>
+
+          <td>
+            <%= link_to "<img src=\"/images/icon_link_broken.gif\" alt=\"Unregister\" />", { :action => 'unregister', :id => student.id, :workshop => @workshop.id }, :confirm => 'Are you sure you want to unregister this user?', :title => 'Unregister' %>
+          </td>
+        <% end %>
+        
+        <td>
+          <%= link_to "<img src=\"/images/page_delete.gif\" alt=\"Delete\" />", { :action => 'delete', :id => student.id, :workshop => (@workshop) ? @workshop.id : nil }, :confirm => 'Are you sure you want to delete this user FOREVER?', :title => 'Delete' %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>Sorry, there are no students to display!</p>
+<% end %>

@@ -1,0 +1,737 @@
+/*  
+Theme Name: Single-Serving Photo
+Theme URI: http://www.grammargulag.com/
+Description: The theme for Single-Serving Photo.
+Version: 1.0
+Author: Aaron "Air" Bieber
+Author URI: http://www.thebailiwick.com/
+*/
+
+#ssp h1 a {
+	display: block;
+	height: 97px;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+#ssp h1 span {
+	display: none;
+}
+
+#ssp p {
+    margin: 0 0 1.3em 0;
+    padding: 0;
+}
+
+#ssp {
+	margin: 0 0 1.8em 0;
+}
+
+/* Begin Typography & Colors */
+body {
+	font-size: 62.5%; /* Resets 1em to 10px */
+	font-family: Georgia, Times, serif;
+	background-color: #d5d6d7;
+	color: #333;
+	text-align: left;
+}
+
+h1, h2, h3, h4 {
+	font-family: Georgia, Times, serif;
+	font-weight: normal;
+	margin: 0 0 0.8em 0;
+	padding: 0;
+}
+
+h1 {
+	font-size: 4em;
+	text-align: center;
+}
+
+h2 {
+	font-size: 2.5em;
+}
+
+#sidebar h2 {
+	font-family: Georgia, Times, serif;
+	font-size: 1em;
+}
+
+h3 {
+	font-size: 2em;
+}
+
+h4 {
+	font-size: 1.8em;
+}
+
+h1, h1 a, h1 a:hover, h1 a:visited, .description {
+	text-decoration: none;
+	color: white;
+}
+
+h2, h2 a, h2 a:visited, h3, h3 a, h3 a:visited {
+	color: #333;
+}
+
+h2, h2 a, h2 a:hover, h2 a:visited, h3, h3 a, h3 a:hover, h3 a:visited, #sidebar h2, #wp-calendar caption, cite {
+	text-decoration: none;
+}
+
+.entry p a:visited {
+/*	color: #b85b5a;*/
+/*	color: #A1422C;*/
+	color: silver;
+	color: #97A4B3;
+}
+
+acronym, abbr, span.caps
+{
+	font-size: 0.9em;
+	letter-spacing: .07em;
+}
+
+a, h2 a:hover, h3 a:hover {
+	font-family: Georgia, Times, serif;
+	color: #06c;
+	text-decoration: none;
+	color: #587093;
+}
+
+a:hover {
+	color: #147;
+	text-decoration: underline;
+	color: #587093;
+}
+	
+/* Begin Structure */
+body {
+	margin: 0;
+	padding: 0; 
+}
+	
+#footer {
+	padding: 0 0 0 1px;
+	margin: 0 auto;
+	width: 710px;
+	clear: both;
+}
+
+#footer p {
+	margin: 0;
+	padding: 5px 0;
+	text-align: center;
+	font-size: 1.3em;
+}
+
+#footer p a {
+	font-size: 1em;
+}
+
+h1 {
+	padding-top: 0;
+	margin: 0;
+}
+
+div.photo img {
+	max-width: 600px;
+}
+
+div.photo {
+	padding: 6px;
+	background-color: white;
+	border: 1px solid #d3d3d3;
+	float: left;
+	margin: 10px 0 10px 0;
+	border-bottom: 1px solid #C7D8B1;
+}
+
+div.photo p {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+div.zamboni {
+	font-size: 0em;
+	clear: both;
+}
+
+/*	Using 'class="alignright"' on an image will (who would've
+	thought?!) align the image to the right. And using 'class="centered',
+	will of course center the image. This is much better than using
+	align="center", being much more futureproof (and valid)
+*/
+	
+img.centered {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+	
+img.alignright {
+	padding: 4px;
+	margin: 0 0 2px 7px;
+	display: inline;
+}
+
+img.alignleft {
+	padding: 4px;
+	margin: 0 7px 2px 0;
+	display: inline;
+}
+
+.alignright {
+	float: right;
+}
+	
+.alignleft {
+	float: left
+}
+
+/* Begin Various Tags & Classes */
+acronym, abbr, span.caps {
+	cursor: help;
+}
+
+acronym, abbr {
+	border-bottom: 1px dashed #999;
+}
+
+blockquote {
+	margin: 15px 30px 0 10px;
+	padding-left: 20px;
+	border-left: 5px solid #ddd;
+}
+
+blockquote cite {
+	margin: 5px 0 0;
+	display: block;
+}
+
+.center {
+	text-align: center;
+}
+
+/*
+hr {
+	display: none;
+}
+*/
+
+hr {
+  border: 0;
+  border-top: 1px solid silver;
+}
+
+hr.sep {
+  margin: 50px 0 0 0;
+}
+
+a img {
+	border: none;
+}
+
+.navigation {
+	height: 18px;
+	padding: 0 0 5px 0;
+	display: block;
+	text-align: center;
+	margin-top: 0;
+	margin-bottom: 15px;
+	background: transparent url('/images/navigationbottom.gif') repeat-x bottom left;
+}
+
+.navigation_bottom {
+	padding: 5px 0 0 0;
+	display: block;
+	text-align: center;
+	margin-top: 15px;
+	margin-bottom: 0;
+	background: transparent url('/images/navigationbottom.gif') repeat-x top left;
+}
+/* End Various Tags & Classes*/
+
+.pagetitle {
+	border-bottom: 2px solid #B9966B;
+	padding: 0 0 5px 0;
+	margin: 0 0 10px 0;
+}
+
+#siteLinks {
+	margin: 10px auto 0 auto;
+	border: 2px solid #d9d9d9;
+	padding: 2px;
+	background-color: white;
+	width: 790px;
+}
+
+#siteLinksPad {
+	font-family: Georgia, Times, serif;
+	border: 1px solid #88A3B7;
+	padding: 3px;
+	font-size: 1.3em;
+	text-align: center;
+	font-weight: normal;
+}
+
+#siteLinksPad a:link,
+#siteLinksPad a:active,
+#siteLinksPad a:hover,
+#siteLinksPad a:visited {
+	font-weight: normal;
+}
+
+#siteLinksPad .ssp {
+	font-weight: bold !important;
+}
+
+p.dim {
+	padding: 0 10px !important;
+	border-top: 1px solid #C0C0C0;
+	border-bottom: 1px solid #C0C0C0;
+	background-color: #F7F7F7;
+}
+
+div.pullquote {
+	float: right;
+	width: 300px;
+	background-color: #F5F5F5;
+	border-top: 2px solid #93B9D8;
+	border-bottom: 2px solid #93B9D8;
+	padding: 10px;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 1.7em;
+	margin: 10px 0 10px 10px;
+	line-height: 1.2em;
+	font-style: italic;
+	color: #666666;
+}
+
+div.photo div.buy_note {
+  text-align: center;
+  font-family: Verdana, Helvetica, sans-serif;
+  width: 250px;
+  margin: 5px auto 0 auto;
+}
+
+div.one-image {
+	width: 200px;
+}
+
+div.one-image-small {
+	width: 150px;
+}
+
+div.one-image img,
+div.one-image-small img {
+  border: 1px solid silver;
+}
+
+div.align-left {
+	margin: 8px 15px 5px 0;
+}
+
+div.align-right {
+	margin: 8px 0 0 15px;
+}
+
+div.one-image h4.giDescription,
+div.one-image-small h4.giDescription {
+	border: none !important;
+	font-size: 1.3em !important;
+	margin: 5px 0 0 0 !important;
+	padding: 0 !important;
+	text-align: center !important;
+}
+
+/* There isn't supposed to be a paragraph tag inside of this block, but
+ * textile will go and add some anyway, so we have to make them act like
+ * adults. */
+div.one-image p,
+div.one-image-small p {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+#gallery_banner {
+  width: 600px;
+  height: 100px;
+  background: transparent url('/images/gallery_banner.jpg') no-repeat top left;
+  text-align: center;
+}
+
+#gallery_banner a:link,
+#gallery_banner a:active,
+#gallery_banner a:visited {
+  display: block;
+  width: 580px;
+  height: 80px;
+  padding: 10px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.8em;
+  line-height: 2em;
+  color: #526F91;
+  text-decoration: none;
+}
+
+#gallery_banner a:hover {
+  color: #83A3B5;
+}
+
+#related_posts {
+  border: 1px solid #83A3B5;
+  padding: 10px;
+  margin: 0 0 10px 0px;
+}
+
+#related_posts h3 {
+  border-bottom: 1px solid #83A3B5 !important;
+  margin: 0 0 5px 0 !important;
+  padding: 0 !important;
+  font-size: 1.5em !important;
+}
+
+#related_posts ul {
+  margin: 0;
+}
+
+#related_posts ul li {
+  margin: 0;
+}
+
+body {
+  background-color: #E6E9DC;
+}
+
+#heading {
+  background: url('/images/header_back.gif') repeat-x top left;
+  height: 141px;
+}
+
+#heading h1 {
+	margin: 0;
+	padding: 0;
+	background-color: #88A3B7;
+	background: transparent url('/images/header.gif') no-repeat top center;
+	height: 141px;
+}
+
+#splash {
+  background: #E6E9DC url('/images/splash_back.jpg') repeat-x left 30px;
+}
+
+#splash h1 {
+  background: transparent url('/images/splash.jpg') no-repeat center 30px;
+  height: 528px;
+}
+
+#splash h1 span {
+  display: none;
+}
+
+#airContentTop {
+	background: transparent url('/images/content_top.gif') no-repeat top left;
+	width: 800px;
+	height: 28px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+#airContentBottom {
+	background: transparent url('/images/content_bottom.gif') no-repeat bottom left;
+	width: 800px;
+	margin: 0 auto 10px auto;
+	padding: 0;
+	height: 28px;
+}
+
+#airContent {
+	background: transparent url('/images/content_back.gif') repeat-y top left;
+	margin: 0 auto;
+	width: 730px;
+	padding: 5px 35px;
+}
+
+div#current_user {
+  color: #9D9F95;
+  font-size: 1.3em;
+  padding: 5px;
+  text-align: center;
+  border-bottom: 1px solid silver;
+}
+
+#copyright {
+  margin: 0 0 50px 0;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+#airContent p {
+  font-size: 1.5em;
+}
+
+#airContent ul li {
+  font-size: 1.5em;
+}
+
+div.form_container {
+  margin: 15px 0;
+  background-color: #D4DFE6;
+  padding: 15px;
+}
+
+div.form_container .field {
+  border: 1px solid #83A3B5;
+  padding: 3px;
+  font-size: 1.6em;
+  font-family: "Trebuchet MS", Trebuchet, Verdana, Helvetica, sans-serif;
+}
+
+div.form_container .form_field span {
+  font-size: 1.3em;
+}
+
+div.form_container .form_field textarea {
+  font-size: 1.3em;
+  width: 100%;
+}
+
+div.form_container .button {
+  border: 1px solid #83A3B5;
+  padding: 2px;
+  font-size: 1.6em;
+  font-family: Verdana, Helvetica, sans-serif;
+}
+
+div.form_container .form_row {
+  clear: both;
+  height: 35px;
+  width: 700px;
+}
+
+div.form_container .form_label {
+  float: left;
+  width: 100px;
+  text-align: right;
+  vertical-align: middle;
+  padding: 5px 10px 0 0;
+  font-size: 1.5em;
+}
+
+div.form_container .form_field {
+  float: left;
+  width: 590px;
+  text-align: left;
+  vertical-align: middle;
+  padding: 0;
+}
+
+div.form_container .form_ex {
+  font-size: 1.4em;
+  font-style: italic;
+}
+
+div.form_container .form_field .form_field_text {
+  font-size: 1.5em;
+}
+
+div.form_container a:link,
+div.form_container a:active,
+div.form_container a:visited {
+	color: #D2792E;
+}
+
+div.fieldWithErrors {
+  display: inline;
+}
+
+div.form_container div.fieldWithErrors .field {
+  border: 2px solid #C85647;
+}
+
+div.error {
+  border: 1px solid #C85647;
+  background-color: #E8EDEF;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+div.error p {
+  margin: 0 !important;
+}
+
+table.data td,
+table.data th {
+	font-size: 1.3em;
+	padding: 4px;
+}
+
+table.data th {
+	border-bottom: 1px solid #267721;
+	vertical-align: top;
+}
+
+table.data th span {
+  font-weight: normal;
+  font-size: 0.9em;
+}
+
+table.data td {
+	border-bottom: 1px solid #EEE;
+}
+
+table.data {
+	margin: 0 0 15px 0;
+}
+
+table.data tr.off {
+	background-color: #EEE;
+}
+
+.ws_row {
+  margin-top: 50px;
+  clear: both;
+}
+
+.ws_title_row {
+  height: 25px;
+  border-bottom: 1px solid silver;
+}
+
+.ws_title {
+  width: 440px;
+  float: left;
+  font-size: 1.8em;
+}
+
+.ws_date {
+  float: left;
+  text-align: right;
+  width: 290px;
+  font-size: 1.5em;
+}
+
+.ws_specs_row {
+  margin-bottom: 10px;
+  background-color: #E4E4DE;
+  font-size: 1.3em;
+  padding: 3px;
+}
+
+.ws_specs_row table tr td {
+  font-size: 1.3em;
+}
+
+.ws_info_row {
+  clear: both;
+  height: 200px;
+}
+
+.ws_pic {
+  float: left;
+  width: 210px;
+}
+
+.ws_desc {
+  float: left;
+  width: 520px;
+  font-size: 1em;
+}
+
+#contact {
+  text-align: center;
+  font-size: 1.5em;
+  border-bottom: 1px solid #9CA299;
+  padding: 0 0 10px 0;
+  margin: 0 0 10px 0;
+}
+
+#intro {
+  padding: 20px;
+}
+
+#intro p {
+  line-height: 1.8em;
+}
+
+#airContent p span.hi {
+  background-color: #FFF69F;
+  padding: 2px;
+}
+
+#top_contact {
+  border-top: 1px solid silver;
+  border-bottom: 1px solid silver;
+  font-size: 1.5em;
+  text-align: center;
+  margin: 40px 0 10px 0;
+  padding: 20px 0;
+}
+
+#first_time {
+  border: 1px solid #ffffff;
+  background-color: #DBEAF8;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+#first_time p {
+  margin-bottom: 0;
+}
+
+/* Twitter stuff */
+#twitter_div {
+  border: 1px solid #8c8c8c;
+  background-color: #f1f1f1;
+  padding: 5px;
+}
+
+#twitter_div ul#twitter_update_list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#twitter_div ul#twitter_update_list li {
+  background: transparent url('/images/twitter_logo_16.gif') no-repeat 1px 0;
+  margin: 0;
+  padding: 0 0 0 75px;
+  font-size: 1.3em;
+  line-height: 1.7em;
+}
+
+#twitter_div ul#twitter_update_list li a {
+  color: black;
+}
+
+#twitter_div ul#twitter_update_list li span a {
+  color: #587093;
+}
+
+#twitter_link {
+  float: right;
+  margin-top: 2px;
+  margin-left: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

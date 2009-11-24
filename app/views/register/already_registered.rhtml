@@ -1,0 +1,5 @@
+<h2>You're already registered!</h2>
+
+<p>We're certain you've already registered for the <%= @workshop.name %> workshop (in <%= @workshop.month %>, <%= @workshop.year %>).</p>
+
+<p>Would you like to <%= link_to "go back to the workshop page", { :action => 'view', :year => @workshop.year, :month => @workshop.month, :ident => @workshop.ident } %> or just <%= link_to "check out our other workshops", { :controller => 'upcoming', :action => 'view' } %>?

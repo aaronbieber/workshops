@@ -1,0 +1,88 @@
+<h2>Administration</h2>
+
+<p>Here, you can administer things.</p>
+
+<h3>Workshops</h3>
+
+<% if @workshops %>
+  <a name="workshops"></a>
+  <table class="data" cellspacing="0" cellpadding="0">
+    <tr>
+      <td colspan="4">
+        Tense:
+        <% if params[:tense] and params[:tense] == 'past' %>
+          <%= link_to "Future", :page => params[:page], :tense => 'future', :anchor => 'workshops' %>
+        <% else %>
+          <%= link_to "Past", :page => params[:page], :tense => 'past', :anchor => 'workshops' %>
+        <% end %>
+        |
+        <%= will_paginate @workshops %>
+      </td>
+    </tr>
+    <tr>
+      <th>Workshop</th>
+      <th>Students<br/><span>(Reg'd/Paid)</span></th>
+      <th>Commencing</th>
+      <th>&nbsp;</th>
+    </tr>
+    <% @workshops.each do |workshop| %>
+      <tr<% if workshop.start_date < Date.today %> class="off"<% end %>>
+        <td><% if !workshop.active %>Inactive: <% end %><%= link_to workshop.name, { :controller => 'workshops', :action => 'edit', :id => workshop.id } %></td>
+        <td><%= workshop.students.count %> / <%= workshop.students_paid.size %></td>
+        <td><%= "#{workshop.start_date.month}/#{workshop.start_date.day}/#{workshop.start_date.year}" %></td>
+        <td>
+          <% if workshop.active %>
+            <%= link_to "<img src=\"/images/page_tick.gif\" alt=\"Active\" />", { :controller => 'workshops', :action => 'deactivate', :id => workshop.id }, :title => 'Deactivate' %>
+          <% else %>
+            <%= link_to "<img src=\"/images/page_cross.gif\" alt=\"Inactive\" />", { :controller => 'workshops', :action => 'activate', :id => workshop.id }, :title => 'Activate' %>
+          <% end %>
+          &nbsp;
+          <%= link_to "<img src=\"/images/page_user.gif\" alt=\"Students\" />", { :controller => 'students', :action => 'view', :id => workshop.id }, :title => 'View Students' %>
+          &nbsp;
+          <%= link_to "<img src=\"/images/page_delete.gif\" alt=\"Delete\" />", { :controller => 'workshops', :action => 'delete', :id => workshop.id }, :confirm => 'Really delete this workshop forever?', :title => 'Delete FOREVER' %>
+          &nbsp;
+          <%= link_to "<img src=\"/images/fffm/copy.gif\" alt=\"Duplicate\" />", { :controller => 'workshops', :action => 'duplicate', :id => workshop.id } %>
+          <% if !workshop.ancestor.nil? %>
+            &nbsp;
+            <img src="/images/fffm/icon_attachment.gif" alt="Inherited" title="This workshop is inheriting data from another workshop" />
+          <% end %>
+
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>No workshops!</p>
+<% end %>
+
+<p><%= link_to "<img src=\"/images/page_new.gif\" alt=\"\" style=\"vertical-align: top;\" /> Create a Workshop", { :controller => 'workshops', :action => 'create' } %></p>
+
+
+<h3>Pages</h3>
+
+<% if @pages %>
+  <table class="data" cellspacing="0" cellpadding="0">
+    <tr>
+      <th>Page</th>
+      <th>Created</th>
+      <th>&nbsp;</th>
+    </tr>
+    <% @pages.each do |page| %>
+      <tr>
+        <td><%= link_to page.title, { :controller => 'pages', :action => 'edit', :id => page.id } %></td>
+        <td><%= page.created_at.strftime("%m/%d/%Y") %></td>
+        <td>
+          <%= link_to "<img src=\"/images/page_delete.gif\" alt=\"Delete\" />", { :object => 'page', :action => 'delete', :id => page.id }, :confirm => 'Really delete this page forever?', :title => 'Delete FOREVER' %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>No pages!</p>
+<% end %>
+
+<p><%= link_to "<img src=\"/images/page_new.gif\" alt=\"\" style=\"vertical-align: top;\" /> Create a Page", { :controller => 'pages', :action => 'create' } %></p>
+
+<h3>Students</h3>
+
+<p><img src="/images/list_users.gif" alt="List Users" />&nbsp;<%= link_to "View the full student list", { :controller => 'students', :action => 'view' } %></p>

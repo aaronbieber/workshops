@@ -1,0 +1,85 @@
+<% if @admin %>
+  <p style="float: right;"><%= link_to "<img src=\"/images/page_edit.gif\" style=\"vertical-align: top;\" alt=\"\" /> Edit", { :controller => 'workshops', :action => 'edit', :id => @workshop.id } %></p>
+<% end %>
+
+<h2><%= @workshop.name %></h2>
+
+<% if @workshop.full %>
+  <p class="full">We're sorry, but this workshop is <strong>full</strong>!</p>
+<% end %>
+
+<div class="ws_specs_row" style="margin-bottom: 20px; text-align: center;">
+  LENGTH: <%= @workshop.length %> day<%= (@workshop.length > 1) ? 's' : '' %>
+  (<%= @workshop.date_range %>)
+  &nbsp;&nbsp;<img style="vertical-align: middle;" src="/images/cross.gif" alt="" />&nbsp;&nbsp;
+  MAX. STUDENTS: <%= @workshop.max_students %>
+  &nbsp;&nbsp;<img style="vertical-align: middle;" src="/images/cross.gif" alt="" />&nbsp;&nbsp;
+  COST: $<%= sprintf("%01.2f", @workshop.cost) %>
+</div>
+
+<p>Your instructors on this workshop will be Aaron Bieber and Christopher Blake. <%= link_to "Read about them here", :controller => 'pages', :action => 'view', :name => 'Biographies' %>.</p>
+
+<%= @workshop.description(true) %>
+
+<a name="a"></a>
+<div class="form_container">
+
+  <% if session[:user] %>
+    <% if @workshop.students.include? session[:user] %>
+    
+    <h3>You're Already Registered!</h3>
+    
+    <p>Thanks a million, you're registered for this workshop.</p>
+
+    <p>Please do <%= link_to "read about our other upcoming workshops", { :controller => 'upcoming', :action => 'view' } %>.</p>
+    <% else %>
+      
+      <h3>Register Now!</h3>
+
+      <p>You're logged in as <%= session[:user].first_name %>. If that's not you, <%= link_to "log out", { :action => 'logout' } %>, otherwise, <%= link_to "go to the registration page", { :action => 'existing', :workshop => @workshop.id } %>!</p>
+      
+    <% end %>
+  <% else %>
+    <% if not @workshop.full %>
+
+      <h3>Register Now!</h3>
+
+      <div id="first_time">
+        <h4>First Time?</h4>
+  
+        <p>So glad you want to join us. <%= link_to "Go to the registration page to get started", { :action => 'create', :workshop => @workshop.id } %>.</p>
+      </div>
+
+      <h4>Been Here Before?</h4>
+  
+      <p>Log in here and we'll zip you right through!</p>
+  
+      <% #form_tag "/#{@workshop.year}/#{@workshop.month}/#{@workshop.ident}/login" do %>
+      <% form_tag "/students/login" do %>
+        <%= hidden_field_tag 'workshop', @workshop.id %>
+        <div class="form_row">
+          <div class="form_label">
+            <label for="student_email">Email:</label>
+          </div>
+          <div class="form_field">
+            <input type="text" size="30" name="student_email" class="field" />
+          </div>
+        </div>
+        <div class="form_row">
+          <div class="form_label">
+            <label for="student_email">Password:</label>
+          </div>
+          <div class="form_field">
+            <input type="password" size="30" name="student_password" class="field" />
+          </div>
+        </div>
+        <div class="form_row"><div class="form_label">&nbsp;</div><div class="form_field"><%= submit_tag "Login" %></div></div>
+      <% end %>
+
+    <% else %>
+      <h3>Sorry, We're Full</h3>
+      <p>This workshop has reached capacity! Our workshops fill up quickly, especially within the months just before they begin. Please do <%= link_to "read about our other upcoming workshops", { :controller => 'upcoming', :action => 'view' } %>.</p>
+    <% end %>
+  <% end %>
+
+</div>

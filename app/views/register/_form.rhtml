@@ -1,0 +1,119 @@
+<div class="form_row">
+  <div class="form_label">
+    <label for="student_first_name">First name:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'student', 'first_name', { :size => 30, :class => 'field' } %>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="student_last_name">Last name:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'student', 'last_name', { :size => 30, :class => 'field' } %>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="student_email">Email:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'student', 'email', { :size => 30, :class => 'field' } %>
+		<% if @create %>
+			<%= hidden_field 'student', 'email' %>
+		<% end %>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="student_address1">Address 1:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'student', 'address1', { :size => 30, :class => 'field' } %>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="student_address2">Address 2:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'student', 'address2', { :size => 30, :class => 'field' } %>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="student_city">City:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'student', 'city', { :size => 30, :class => 'field' } %>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="student_state">State:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'student', 'state', { :size => 3, :class => 'field', :maxlength => 2 } %>
+    <span class="form_ex">
+      ex. <strong>CT</strong>
+    </span>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="student_zip">ZIP:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'student', 'zip', { :size => 10, :class => 'field' } %>
+    <span class="form_ex">
+      ex. <strong>01234</strong> or <strong>01234-9876</strong>
+    </span>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="student_phone">Phone:</label>
+  </div>
+  <div class="form_field">
+    <%= text_field 'student', 'phone', { :size => 15, :class => 'field' } %>
+    <span class="form_field_text">&nbsp;ext.</span>
+    <%= text_field 'student', 'ext', { :size => 4, :class => 'field' } %>
+  </div>
+</div>
+
+<% if @create %>
+
+<p>Your password will allow you to edit your contact information, easily register for other workshops, and give us feedback that will help us improve the workshop experience. <strong>Passwords must be at least 8 characters in length</strong>.</p>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="student_password">Password:</label>
+  </div>
+  <div class="form_field">
+    <%= password_field 'student', 'password', { :size => 20, :class => 'field' } %>
+  </div>
+</div>
+
+<div class="form_row">
+  <div class="form_label">
+    <label for="student_password">Once more:</label>
+  </div>
+  <div class="form_field">
+    <%= password_field 'student', 'password_confirmation', { :size => 20, :class => 'field' } %>
+  </div>
+</div>
+
+<% else %>
+
+<%= hidden_field 'student', 'password' %>
+
+<% end %>

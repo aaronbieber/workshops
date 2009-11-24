@@ -1,0 +1,11 @@
+<% if @admin %>
+  <p style="float: right;"><%= link_to "<img src=\"/images/page_edit.gif\" style=\"vertical-align: top;\" alt=\"\" /> Edit", { :controller => 'admin', :action => 'edit', :object => 'page', :id => @page.id } %></p>
+<% end %>
+
+<% if @previous_page %>
+<p><a href="<%= @previous_page %>">&laquo; Return to the previous page</a></p>
+<% end %>
+
+<h2><%= @page.title %></h2>
+
+<%= @page.text(true) %>
