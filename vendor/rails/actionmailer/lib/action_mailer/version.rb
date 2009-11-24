@@ -1,8 +1,8 @@
 module ActionMailer
   module VERSION #:nodoc:
-    MAJOR = 1
+    MAJOR = 2
     MINOR = 3
-    TINY  = 5
+    TINY  = 4
 
     STRING = [MAJOR, MINOR, TINY].join('.')
   end
