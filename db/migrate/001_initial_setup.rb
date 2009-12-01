@@ -12,7 +12,7 @@ class InitialSetup < ActiveRecord::Migration
 			t.column "phone",       :string,   :limit => 10
 			t.column "ext",         :string,   :limit => 10
 			t.column "created_at",  :datetime,                                :null => false
-			t.column "modified_at", :datetime,                                :null => false
+			t.column "modified_at", :datetime,                                :null => true
 		end
 
 		create_table "students_workshops", :force => true do |t|
@@ -30,7 +30,7 @@ class InitialSetup < ActiveRecord::Migration
 			t.column "max_students", :integer,                 :default => 0,   :null => false
 			t.column "cost",         :float,                   :default => 0.0, :null => false
 			t.column "created_at",   :datetime,                                 :null => false
-			t.column "modified_at",  :datetime,                                 :null => false
+			t.column "modified_at",  :datetime,                                 :null => true
 		end
   end
 

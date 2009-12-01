@@ -5,7 +5,7 @@ class CreateAdministrators < ActiveRecord::Migration
       t.column 'pass',        :string,  :limit => 40, :default => '', :null => false
       t.column 'salt',        :string,  :limit => 10, :default => '', :null => false
 			t.column 'created_at',  :datetime,                              :null => false
-			t.column 'modified_at', :datetime,                              :null => false
+			t.column 'modified_at', :datetime,                              :null => true
     end
   end
 
