@@ -140,16 +140,21 @@ class Workshop < ActiveRecord::Base
       # 
       # $left:http://server.com/image.jpg$
       # $right:http://server.com/image.jpg$
+			#
+			# You can use optional titles and attributions:
+			#
+			# $left:http://server.com/image.jpg(My Great Image)$
+			# $left:http://server.com/image.jpg(My Great Image|A. Bieber)$
       # 
       # At the moment, images are EXPECTED to be 200 pixels square. I know that
       # might be limiting, but the objects are floated with margins and that's just
       # how it has to be, OK?
       # 
-      d.gsub!(/^\$(left|right):(.*?)(\((.*?)\))?\$\s*$/) do |m|
+      d.gsub!(/^\$(left|right):(.*?)(\(([^|]*?)(?:\|(.*)?)?\))?\$\s*$/) do |m|
         "<div class=\"one-image" +
         (($1.downcase == 'left') ? " align-left\" style=\"float: left;\"" : " align-right\" style=\"float: right;\"") +
         "><img src=\"#{$2}\" alt=\"\" />" +
-        (($4) ? "<h4 class=\"giDescription\">#{$4}</h4>" : "") +
+        (($4) ? "<h4 class=\"giDescription\">#{$4}" + (($5) ? "<br /><em>#{$5}</em>" : "") + "</h4>" : "") +
         "</div>\n"
       end
 
@@ -157,15 +162,17 @@ class Workshop < ActiveRecord::Base
       # 
       # $image:left/Places/DeathValley/Tendrils.jpg$
       # $image:right/Places/DeathValley/Tendrils.jpg$
+			#
+			# (Now defunct. At least for the time being.)
       # 
-      d.gsub!(/^\$image:(left|right)(\/.*?)\$\s*$/) do |m|
-        http = Net::HTTP.new('www.fisheyegallery.com')
-        http.start
-        resp,data = http.get("/main.php?g2_view=imageblock.External&g2_blocks=specificItem&g2_show=title&g2_item=#{$2}&g2_align=#{$1}")
-        http.finish
-        data.gsub(/(giDescription">[^<]*?)\s*(<\/h4>)/, '\1, by A. Bieber\2')
-        # "http://www.fisheyegallery.com/main.php?g2_view=imageblock.External&g2_blocks=specificItem&g2_show=title&g2_item=#{$2}&g2_align=#{$1}"
-      end
+      #d.gsub!(/^\$image:(left|right)(\/.*?)\$\s*$/) do |m|
+      #  http = Net::HTTP.new('www.fisheyegallery.com')
+      #  http.start
+      #  resp,data = http.get("/main.php?g2_view=imageblock.External&g2_blocks=specificItem&g2_show=title&g2_item=#{$2}&g2_align=#{$1}")
+      #  http.finish
+      #  data.gsub(/(giDescription">[^<]*?)\s*(<\/h4>)/, '\1, by A. Bieber\2')
+      #  # "http://www.fisheyegallery.com/main.php?g2_view=imageblock.External&g2_blocks=specificItem&g2_show=title&g2_item=#{$2}&g2_align=#{$1}"
+      #end
 
       r = RedCloth.new d
       r = r.to_html
