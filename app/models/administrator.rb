@@ -1,5 +1,5 @@
 class Administrator < ActiveRecord::Base
-	def self.authenticate(email, p)
+  def self.authenticate(email, p)
     user = Administrator.find(:first, :conditions => [ "email = ?", email ] )
     return nil if user.nil?
     return user if Administrator.encrypt(p, user.salt) == user.pass

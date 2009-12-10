@@ -1,21 +1,21 @@
 class Student < ActiveRecord::Base
   has_many :registrants
-	has_many :workshops, :through => :registrants
+  has_many :workshops, :through => :registrants
 
   attr_protected :salt, :id
-	attr_accessor :password
+  attr_accessor :password
   attr_accessor :refresh_password
-	
+  
   validates_presence_of :first_name, :last_name, :email, :address1, :city, :zip, :state
-	validates_presence_of :password, :password_confirmation #, :if => Proc.new { |s| !s.pass or !s.salt }
+  validates_presence_of :password, :password_confirmation #, :if => Proc.new { |s| !s.pass or !s.salt }
   validates_length_of :password, :within => 8...32 #, :if => Proc.new { |s| !s.pass or !s.salt }
-	validates_uniqueness_of :email
-	validates_format_of :email, :with => %r{^(?:[_a-z0-9-]+)(\.[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-zA-Z0-9\-\.]+)*(\.[a-z]{2,4})$}i
-	validates_format_of :zip, :with => /^\d{5}(\d{4})?$|^[a-z][1-9][a-z]\s?[a-z]{3}$/i
-	validates_format_of :phone, :with => /^\d{10}\d?$|^$/
-	validates_confirmation_of :password
+  validates_uniqueness_of :email
+  validates_format_of :email, :with => %r{^(?:[_a-z0-9-]+)(\.[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-zA-Z0-9\-\.]+)*(\.[a-z]{2,4})$}i
+  validates_format_of :zip, :with => /^\d{5}(\d{4})?$|^[a-z][1-9][a-z]\s?[a-z]{3}$/i
+  validates_format_of :phone, :with => /^\d{10}\d?$|^$/
+  validates_confirmation_of :password
 
-	def self.authenticate(email, p)
+  def self.authenticate(email, p)
     user = Student.find(:first, :conditions => [ "email = ?", email ] )
     return nil if user.nil?
     

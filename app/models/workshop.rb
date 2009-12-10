@@ -1,8 +1,8 @@
 class Workshop < ActiveRecord::Base
   has_many :registrants
-	has_many :students, :through => :registrants
-	
-	validates_presence_of :name, :max_students, :cost, :description, :if => Proc.new { |w| w.ancestor.nil? }
+  has_many :students, :through => :registrants
+
+  validates_presence_of :name, :max_students, :cost, :description, :if => Proc.new { |w| w.ancestor.nil? }
   validates_presence_of :cutoff_date, :short_name, :start_date, :end_date
 
   validates_format_of :short_name, :with => /^[^\s]*$/, :message => 'cannot contain spaces'
@@ -10,9 +10,9 @@ class Workshop < ActiveRecord::Base
   def self.per_page
     10
   end
-	
-	def year
-	  self.start_date.year
+
+  def year
+    self.start_date.year
   end
   
   def month
@@ -23,14 +23,14 @@ class Workshop < ActiveRecord::Base
     self.short_name
   end
 
-	def date_range
-		if self.start_date == self.end_date
-			"#{Date::MONTHNAMES[self.start_date.month]} #{self.start_date.day}, #{self.start_date.year}"
-		else
-			"#{Date::MONTHNAMES[self.start_date.month]} #{self.start_date.day}, #{self.start_date.year} - " +
-			"#{Date::MONTHNAMES[self.end_date.month]} #{self.end_date.day}, #{self.end_date.year}"
-		end
-	end
+  def date_range
+    if self.start_date == self.end_date
+      "#{Date::MONTHNAMES[self.start_date.month]} #{self.start_date.day}, #{self.start_date.year}"
+    else
+      "#{Date::MONTHNAMES[self.start_date.month]} #{self.start_date.day}, #{self.start_date.year} - " +
+      "#{Date::MONTHNAMES[self.end_date.month]} #{self.end_date.day}, #{self.end_date.year}"
+    end
+  end
 
 #  def short_name
 #    if read_attribute(:short_name).empty? and !self.ancestor.nil?
@@ -78,7 +78,7 @@ class Workshop < ActiveRecord::Base
   end
   
   def students_paid
-    # How many kids paid?
+    # How many fine, fine people paid?
     self.registrants.select { |r| !r.payment_received.nil? }
   end
   
@@ -98,7 +98,7 @@ class Workshop < ActiveRecord::Base
       http.finish
       data
 
-#     I'm not sure if this works?
+      # I'm not sure if this works?
       tag = data.match(/<img.*?>/)[0]
       "<div class=\"one-image\">#{tag}</div>"
     end
@@ -140,11 +140,11 @@ class Workshop < ActiveRecord::Base
       # 
       # $left:http://server.com/image.jpg$
       # $right:http://server.com/image.jpg$
-			#
-			# You can use optional titles and attributions:
-			#
-			# $left:http://server.com/image.jpg(My Great Image)$
-			# $left:http://server.com/image.jpg(My Great Image|A. Bieber)$
+      #
+      # You can use optional titles and attributions:
+      #
+      # $left:http://server.com/image.jpg(My Great Image)$
+      # $left:http://server.com/image.jpg(My Great Image|A. Bieber)$
       # 
       # At the moment, images are EXPECTED to be 200 pixels square. I know that
       # might be limiting, but the objects are floated with margins and that's just
@@ -162,8 +162,8 @@ class Workshop < ActiveRecord::Base
       # 
       # $image:left/Places/DeathValley/Tendrils.jpg$
       # $image:right/Places/DeathValley/Tendrils.jpg$
-			#
-			# (Now defunct. At least for the time being.)
+      #
+      # (Now defunct. At least for the time being.)
       # 
       #d.gsub!(/^\$image:(left|right)(\/.*?)\$\s*$/) do |m|
       #  http = Net::HTTP.new('www.fisheyegallery.com')

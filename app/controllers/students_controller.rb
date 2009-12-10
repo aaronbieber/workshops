@@ -1,11 +1,11 @@
 class StudentsController < ApplicationController
   before_filter :authenticate, :only => [:view,:unregister,:paid,:unpaid]
 
-	def login
-	  @email = params[:student_email]
+  def login
+    @email = params[:student_email]
     @workshop = params[:workshop] || nil
-	  if request.post?
-	    if session[:user] = Student.authenticate(params[:student_email], params[:student_password])
+    if request.post?
+      if session[:user] = Student.authenticate(params[:student_email], params[:student_password])
 
         if !session[:user].new_password.nil? and !session[:user].new_password_date.nil?
           # If the user has a temporary password, destroy it.
@@ -31,7 +31,7 @@ class StudentsController < ApplicationController
         else
           flash[:error] = 'Sorry, I couldn\'t find that login. Make sure you\'ve entered everything correctly!'
         end
-	      #render :template => 'register/existing'
+        #render :template => 'register/existing'
       end
     else
       #render :template => 'register/existing'

@@ -1,13 +1,13 @@
 class RegisterController < ApplicationController
   before_filter :get_workshop
 
-	def view
-	  # If we couldn't find it or it doesn't exist or something, whoops.
-		if @workshop.nil?
+  def view
+    # If we couldn't find it or it doesn't exist or something, whoops.
+    if @workshop.nil?
       redirect_to :controller => 'upcoming', :action => 'view'
-		end
-	end
-	
+    end
+  end
+  
   def join
     email = params[:email]
     if email.empty? or email.match(%r{^(?:[_a-z0-9-]+)(\.[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-zA-Z0-9\-\.]+)*(\.[a-z]{2,4})$}i).nil?
@@ -28,7 +28,7 @@ class RegisterController < ApplicationController
   end
   
   def create
-		@create = true
+    @create = true
     if request.post?
       # It means Student Hash ;-)
       stash     = params[:student]
