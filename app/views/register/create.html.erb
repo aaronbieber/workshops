@@ -12,10 +12,10 @@
 
   <% if @student.errors.count > 0 %>
     <div class="error">
-      <p>The fields in red are required or their content isn't valid. Make sure you've entered a proper e-mail address and supplied information for all fields.</p>
+      <p>We had a bit of a problem with the fields marked in red.</p>
       <ul>
-      <% @student.errors.each do |error| %>
-        <li><%= "#{error[0]} #{error[1]}"%></li>
+      <% @student.errors.each do |field,error| %>
+        <li><%= error %></li>
       <% end %>
       </ul>
     </div>

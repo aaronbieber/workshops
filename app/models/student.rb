@@ -6,14 +6,20 @@ class Student < ActiveRecord::Base
   attr_accessor :password
   attr_accessor :refresh_password
   
-  validates_presence_of :first_name, :last_name, :email, :address1, :city, :zip, :state
-  validates_presence_of :password, :password_confirmation #, :if => Proc.new { |s| !s.pass or !s.salt }
-  validates_length_of :password, :within => 8...32 #, :if => Proc.new { |s| !s.pass or !s.salt }
-  validates_uniqueness_of :email
-  validates_format_of :email, :with => %r{^(?:[_a-z0-9-]+)(\.[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-zA-Z0-9\-\.]+)*(\.[a-z]{2,4})$}i
-  validates_format_of :zip, :with => /^\d{5}(\d{4})?$|^[a-z][1-9][a-z]\s?[a-z]{3}$/i
-  validates_format_of :phone, :with => /^\d{10}\d?$|^$/
-  validates_confirmation_of :password
+  validates_presence_of :first_name, :last_name, :address1, :city, :zip, :state, :email, :message => 'Please fill in all required fields.'
+
+  validates_presence_of :password, :password_confirmation, :if => :should_validate_password?, :message => 'Please enter your password twice.'
+  validates_length_of :password, :within => 8...32, :if => :should_validate_password?, :message => 'Your password must be at least 8 characters, but shorter than 32.'
+  validates_confirmation_of :password, :if => :should_validate_password?, :message => 'The two passwords entered don\'t match.'
+
+  validates_uniqueness_of :email, :message => 'The e-mail address entered already exists.'
+  validates_format_of :email, :with => /^\S*@\S*\./, :message => 'The e-mail address entered doesn\'t seem to be valid.'
+  validates_format_of :zip, :with => /^\d{5}(\d{4})?$|^[a-z][1-9][a-z]\s?[a-z]{3}$/i, :message => 'The zip code entered doesn\'t seem to be valid.'
+  validates_format_of :phone, :with => /^\d{10}\d?$|^$/, :message => 'The phone number entered doesn\'t appear to be valid.'
+
+  def should_validate_password?
+    new_record?
+  end
 
   def self.authenticate(email, p)
     user = Student.find(:first, :conditions => [ "email = ?", email ] )

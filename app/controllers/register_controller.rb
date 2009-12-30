@@ -31,7 +31,9 @@ class RegisterController < ApplicationController
     @create = true
     if request.post?
       # It means Student Hash ;-)
-      stash     = params[:student]
+      stash     = params[:student].dup
+
+      logger.info params.inspect
       
       # Clean up some data
       stash[:zip].gsub!(/[^\d]/, '')
@@ -59,7 +61,7 @@ class RegisterController < ApplicationController
   end
   
   def update
-    stash     = params[:student]
+    stash     = params[:student].dup
     sid       = params[:sid]
     @student  = Student.find(params[:sid])
     if @student.update_attributes(stash)
