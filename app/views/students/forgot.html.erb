@@ -1,3 +1,43 @@
-<h2>Password Delivered</h2>
+<% if @sent %>
+  <h2>Password Delivered</h2>
 
-<p>A new temporary password has been generated and e-mailed to you. When you have received the message, <%= link_to "return to the log in page", :action => 'login' %>.</p>
+  <p>A new temporary password has been generated and e-mailed to you. When you have received the message, <%= link_to "return to the log in page", :action => 'login' %>.</p>
+<% else %>
+  <h2>Forgot Your Password?</h2>
+
+  <p>Enter your e-mail address and we will e-mail you a temporary password to access your account.</p>
+
+  <div class="form_container">
+    <% if @student.errors.count > 0 %>
+      <div class="error">
+        <p>The fields in red are required or their content isn't valid. Make sure you've entered a proper e-mail address and supplied information for all fields.</p>
+        <ul>
+        <% @student.errors.each do |error| %>
+          <li><%= "#{error[0]} #{error[1]}"%></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% if flash[:error] %>
+      <div class="error">
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end %>
+
+    <% form_tag '/students/forgot' do %>
+      <div class="form_row">
+        <div class="form_label">
+          <label for="student_email">Email:</label>
+        </div>
+        <div class="form_field">
+          <input type="text" name="student_email" size="30" class="field" value="<%= @email %>" />
+        </div>
+      </div>
+      <div class="form_row">
+        <div class="form_label">&nbsp;</div>
+        <div class="form_field"><%= submit_tag "Remind Me" %></div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

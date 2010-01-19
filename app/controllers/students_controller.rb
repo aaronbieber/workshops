@@ -7,11 +7,8 @@ class StudentsController < ApplicationController
     if request.post?
       if session[:user] = Student.authenticate(params[:student_email], params[:student_password])
 
+        # If the user has a temporary password, prompt them to change it.
         if !session[:user].new_password.nil? and !session[:user].new_password_date.nil?
-          # If the user has a temporary password, destroy it.
-          session[:user].new_password = nil
-          session[:user].new_password_date = nil
-
           redirect_to :controller => 'students', :action => 'change_password'
         else
 
@@ -27,14 +24,11 @@ class StudentsController < ApplicationController
       else
         if Student.exists?(:email => params[:student_email])
           student = Student.find_by_email(params[:student_email])
-          flash[:error] = 'Your password isn\'t correct. If you\'ve forgotten it, <a href="/students/forgot/'+student.id.to_s+'">click here and we\'ll e-mail it to you</a>.'
+          flash.now[:error] = 'Your password isn\'t correct. If you\'ve forgotten it, <a href="/students/forgot/'+student.id.to_s+'">click here and we\'ll e-mail it to you</a>.'
         else
-          flash[:error] = 'Sorry, I couldn\'t find that login. Make sure you\'ve entered everything correctly!'
+          flash.now[:error] = 'Sorry, I couldn\'t find that login. Make sure you\'ve entered everything correctly!'
         end
-        #render :template => 'register/existing'
       end
-    else
-      #render :template => 'register/existing'
     end
   end
 
@@ -45,14 +39,12 @@ class StudentsController < ApplicationController
       if @student.valid?
         @student.new_password = nil
         @student.new_password_date = nil
-        @student.save
         session[:user] = @student
         redirect_to :controller => 'upcoming', :action => 'view'
-      else
-        flash[:error] = (@student.errors.full_messages.collect { |m| m.sub(/./) { |a| a.downcase } }.join(', ') + '.').sub(/./) { |a| a.upcase }
       end
+    else
+      @student = Student.new
     end
-    logger.info "User: " + session[:user].inspect
   end
   
   def logout
@@ -60,16 +52,22 @@ class StudentsController < ApplicationController
     redirect_to :controller => 'upcoming', :action => 'view'
   end
 
-
   def create
   end
 
   def forgot
-    if params[:id] and Student.exists?(params[:id]) and @student = Student.find(params[:id])
-      newpass = @student.create_new_password
-      Notifier.deliver_forgot_password(@student, newpass)
-      #redirect_to :action => 'sent_reminder'
-    #else
+    @sent = false
+    if request.post?
+      if @student = Student.find_by_email(params[:student_email])
+        @sent = true
+        newpass = @student.create_new_password
+        Notifier.deliver_forgot_password(@student, newpass)
+      else
+        flash.now[:error] = 'The e-mail address you entered wasn\'t found. Try again?'
+        @student = Student.new
+      end
+    else
+      @student = Student.new
     end
   end
 
@@ -145,5 +143,4 @@ class StudentsController < ApplicationController
       redirect_to :action => 'view', :id => params[:workshop]
     end
   end
-
 end

@@ -36,7 +36,7 @@
       
       <h3>Register Now!</h3>
 
-      <p>You're logged in as <%= session[:user].first_name %>. If that's not you, <%= link_to "log out", { :action => 'logout' } %>, otherwise, <%= link_to "go to the registration page", { :action => 'existing', :workshop => @workshop.id } %>!</p>
+      <p>You're logged in as <%= session[:user].first_name %>. If that's not you, <%= link_to "log out", { :controller => 'students', :action => 'logout' } %>, otherwise, <%= link_to "go to the registration page", { :action => 'existing', :workshop => @workshop.id } %>!</p>
       
     <% end %>
   <% else %>
@@ -73,7 +73,13 @@
             <input type="password" size="30" name="student_password" class="field" />
           </div>
         </div>
-        <div class="form_row"><div class="form_label">&nbsp;</div><div class="form_field"><%= submit_tag "Login" %></div></div>
+        <div class="form_row">
+          <div class="form_label">&nbsp;</div>
+          <div class="form_field">
+            <%= submit_tag "Login" %>
+            <p style="display: inline;">&nbsp;<a href="/students/forgot">Forget your password?</a></p>
+          </div>
+        </div>
       <% end %>
 
     <% else %>

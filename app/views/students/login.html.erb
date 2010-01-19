@@ -30,7 +30,13 @@
           <input type="password" name="student_password" size="30" class="field" />
         </div>
       </div>
-      <div class="form_row"><div class="form_label">&nbsp;</div><div class="form_field"><%= submit_tag "Log In" %></div></div>
+      <div class="form_row">
+        <div class="form_label">&nbsp;</div>
+        <div class="form_field">
+          <%= submit_tag "Log In" %>
+          <p style="display: inline;">&nbsp;<a href="/students/forgot">Forget your password?</a></p>
+        </div>
+      </div>
     <% end %>
   </div>
 
@@ -41,8 +47,7 @@
   <p>It's nice to see you again, <%= @student.first_name %>! Just make sure all of this stuff is correct and click "Save."</p>
 
   <div class="form_container">
-
-    <% if @student.errors.count > 0 %>
+    <% if @student.errors.count %>
       <div class="error">
         <p>The fields in red are required or their content isn't valid. Make sure you've entered a proper e-mail address and supplied information for all fields.</p>
         <ul>
@@ -57,7 +62,12 @@
       <%= render :partial => 'form' %>
       <%= hidden_field_tag 'workshop_id', nil, :value => @workshop.id %>
       <%= hidden_field_tag 'sid', nil, :value => @student.id %>
-      <div class="form_row"><div class="form_label">&nbsp;</div><div class="form_field"><%= submit_tag "Update and Register" %></div></div>
+      <div class="form_row">
+        <div class="form_label">&nbsp;</div>
+        <div class="form_field">
+          <%= submit_tag "Update and Register" %>
+        </div>
+      </div>
     <% end %>
 
   </div>

@@ -6,18 +6,34 @@ class Student < ActiveRecord::Base
   attr_accessor :password
   attr_accessor :refresh_password
   
-  validates_presence_of :first_name, :last_name, :address1, :city, :zip, :state, :email, :message => 'Please fill in all required fields.'
+  validates_presence_of :first_name, :message => 'Enter your first name.'
+  validates_presence_of :last_name, :message => 'Enter your last name.'
+  validates_presence_of :address1, :message => 'Enter your address.'
+  validates_presence_of :city, :message => 'What city do you live in?'
+  validates_presence_of :zip, :message => 'What is your zip code?'
+  validates_presence_of :state, :message => 'Please enter a state.'
+  validates_presence_of :email, :message => 'We will contact you via e-mail; please enter your address.'
 
-  validates_presence_of :password, :password_confirmation, :if => :should_validate_password?, :message => 'Please enter your password twice.'
-  validates_length_of :password, :within => 8...32, :if => :should_validate_password?, :message => 'Your password must be at least 8 characters, but shorter than 32.'
-  validates_confirmation_of :password, :if => :should_validate_password?, :message => 'The two passwords entered don\'t match.'
+  validates_length_of :password, :within => 8...32,
+                      :if => :should_validate_password?,
+                      :unless => Proc.new { |s| s.password.empty? },
+                      :message => 'Your password must be at least 8 characters, but shorter than 32.'
+
+  validates_presence_of :password, :if => :should_validate_password?, :message => 'Enter a password to protect your account.'
+  validates_presence_of :password_confirmation, :if => :should_validate_password?, :message => 'Please enter your password twice.'
+  validates_confirmation_of :password, :if => :should_validate_password?, :unless => Proc.new { |s| s.password_confirmation.empty? }, :message => 'The two passwords entered don\'t match.'
 
   validates_uniqueness_of :email, :message => 'The e-mail address entered already exists.'
-  validates_format_of :email, :with => /^\S*@\S*\./, :message => 'The e-mail address entered doesn\'t seem to be valid.'
-  validates_format_of :zip, :with => /^\d{5}(\d{4})?$|^[a-z][1-9][a-z]\s?[a-z]{3}$/i, :message => 'The zip code entered doesn\'t seem to be valid.'
+  validates_format_of :email, :unless => Proc.new { |s| s.email.empty? }, :with => /^\S*@\S*\./, :message => 'The e-mail address entered doesn\'t seem to be valid.'
+
+  validates_format_of :zip, :with => /^\d{5}(\d{4})?$|^[a-z][1-9][a-z]\s?[a-z]{3}$/i,
+                      :unless => Proc.new { |s| s.zip.empty? },
+                      :message => 'The zip code entered doesn\'t seem to be valid.'
+
   validates_format_of :phone, :with => /^\d{10}\d?$|^$/, :message => 'The phone number entered doesn\'t appear to be valid.'
 
   def should_validate_password?
+    return true
     new_record?
   end
 
