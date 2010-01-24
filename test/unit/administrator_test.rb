@@ -1,8 +1,6 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
-class AdministratorTest < Test::Unit::TestCase
-  fixtures :administrators
-
+class AdministratorTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   def test_truth
     assert true
