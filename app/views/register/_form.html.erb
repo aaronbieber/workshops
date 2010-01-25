@@ -87,6 +87,15 @@
   </div>
 </div>
 
+<div class="form_row">
+  <div class="form_label">
+    <label for="registrant_comments">Comments:</label>
+  </div>
+  <div class="form_field">
+    <%= text_area 'registrant', 'comments', { :rows => 5, :cols => 30, :class => 'field' } %>
+  </div>
+</div>
+
 <% if @create %>
 
 <p>Your password will allow you to edit your contact information, easily register for other workshops, and give us feedback that will help us improve the workshop experience. <strong>Passwords must be at least 8 characters in length</strong>.</p>
