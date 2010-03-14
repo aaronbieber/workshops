@@ -1,4 +1,5 @@
 class Workshop < ActiveRecord::Base
+  include ActionView::Helpers::DateHelper
   has_many :registrants
   has_many :students, :through => :registrants
 
@@ -81,27 +82,18 @@ class Workshop < ActiveRecord::Base
     # How many fine, fine people paid?
     self.registrants.select { |r| !r.payment_received.nil? }
   end
-  
+
   def thumbnail
     if read_attribute(:thumbnail).empty? and !self.ancestor.nil?
       return self.ancestor.thumbnail
     else
-      path = read_attribute(:thumbnail)
+      return read_attribute(:thumbnail)
     end
-
-    if path.match(/^http/)
-      "<div class=\"one-image\"><img src=\"#{path}\" alt=\"\" /></div>"
-    elsif path.match(/^\//)
-      http = Net::HTTP.new('www.fisheyegallery.com')
-      http.start
-      resp,data = http.get("/main.php?g2_view=imageblock.External&g2_blocks=specificItem&g2_show=none&g2_item=#{path}")
-      http.finish
-      data
-
-      # I'm not sure if this works?
-      tag = data.match(/<img.*?>/)[0]
-      "<div class=\"one-image\">#{tag}</div>"
-    end
+  end
+  
+  def thumbnail_tag
+    path = self.thumbnail
+    "<div class=\"one-image\"><img src=\"#{path}\" alt=\"#{self.name}\" /></div>"
   end
   
   def length
@@ -121,6 +113,10 @@ class Workshop < ActiveRecord::Base
     else
       d
     end
+  end
+
+  def when
+    distance_of_time_in_words_to_now(self.cutoff_date)
   end
 
   def description(usehtml = false)
@@ -192,5 +188,12 @@ class Workshop < ActiveRecord::Base
     elsif a.is_a? Fixnum
       self.ancestor_id = a
     end
+  end
+
+  def self.find_featured
+    Workshop.find(:all, 
+      :conditions => [ "cutoff_date >= ? and active = 1", Date.today ],
+      :order => "start_date ASC",
+      :limit => 1)
   end
 end

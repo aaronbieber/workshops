@@ -50,7 +50,7 @@
           COST: $<%= sprintf("%01.2f", workshop.cost) %>
         </div>
         <div class="ws_pic">
-          <%= link_to workshop.thumbnail, {
+          <%= link_to workshop.thumbnail_tag, {
               :controller => 'register',
               :action => 'view',
               :year => workshop.start_date.year,

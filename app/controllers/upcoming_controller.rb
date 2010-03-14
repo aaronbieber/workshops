@@ -11,6 +11,8 @@ class UpcomingController < ApplicationController
         :conditions => [ "cutoff_date >= ? and active = 1", Date.today ],
         :order => "start_date ASC" )
     end
+
+    @featured = Workshop.find_featured
   end
 
 end
