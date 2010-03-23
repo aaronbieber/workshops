@@ -779,3 +779,10 @@ table.data tr.off {
 #featured p {
   margin: 0;
 }
+
+#airContent p.soon {
+  font-size: 1.7em;
+  padding: 10px;
+  background-color: #FEFFAB;
+  font-style: italic;
+}

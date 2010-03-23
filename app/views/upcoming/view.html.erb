@@ -58,6 +58,10 @@
               :ident => workshop.short_name } %>
         </div>
         <div class="ws_desc">
+          <% if workshop.days_until < 10 %>
+            <p class="soon">Only <%= workshop.days_until %> days left to register!</p>
+          <% end %>
+
           <%= workshop.short_desc(true) %>
 
           <% if workshop.full %><p style="color: #C45931;"><strong>Sorry, this workshop is full!</strong></p><% end %>

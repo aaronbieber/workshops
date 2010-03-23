@@ -119,6 +119,10 @@ class Workshop < ActiveRecord::Base
     distance_of_time_in_words_to_now(self.cutoff_date)
   end
 
+  def days_until
+    (self.cutoff_date - Date.today).to_i
+  end
+
   def description(usehtml = false)
     if read_attribute(:description).empty? and !self.ancestor.nil?
       return self.ancestor.description(usehtml)

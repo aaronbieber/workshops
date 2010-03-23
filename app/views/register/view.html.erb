@@ -4,6 +4,10 @@
 
 <h2><%= @workshop.name %></h2>
 
+<% if @workshop.days_until < 10 %>
+  <p class="soon">Only <%= @workshop.days_until %> days left to <a href="#a">register</a>!</p>
+<% end %>
+
 <% if @workshop.full %>
   <p class="full">We're sorry, but this workshop is <strong>full</strong>!</p>
 <% end %>
