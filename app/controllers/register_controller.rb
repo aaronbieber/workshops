@@ -44,10 +44,18 @@ class RegisterController < ApplicationController
       @student  = Student.new(stash)
 
       if not @student.valid?
+        @registrant = Registrant.new(params[:registrant])
         render :template => 'register/create'
       else
         @student.save
         @workshop.students << @student unless @workshop.students.include? @student
+
+        # Save the registration comments, if any.
+        if not params[:registrant][:comments].empty?
+          reg = @student.registrants.find_by_workshop_id(@workshop.id)
+          reg.comments = params[:registrant][:comments]
+          reg.save
+        end
 
         session[:user] = @student
 
@@ -57,6 +65,7 @@ class RegisterController < ApplicationController
       end
     else
       @student = Student.new(:email => params[:email])
+      @registrant = Registrant.new(params[:registrant])
     end
   end
   
@@ -66,6 +75,13 @@ class RegisterController < ApplicationController
     @student  = Student.find(params[:sid])
     if @student.update_attributes(stash)
       @workshop.students << @student unless @workshop.students.include? @student
+
+      # Save registration comments, if any.
+      if not params[:registrant][:comments].empty?
+        reg = @student.registrants.find_by_workshop_id(@workshop.id)
+        reg.comments = params[:registrant][:comments]
+        reg.save
+      end
 
       Notifier.deliver_signup_thanks(@student, @workshop)
       Notifier.deliver_headsup_signup(@student, @workshop)

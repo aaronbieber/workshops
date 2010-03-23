@@ -25,9 +25,10 @@ development:
 test:
   adapter: mysql
   database: workshops_test
-  username: root
-  password:
+  username: workshops
+  password: 40ze9kbr
   host: localhost
+  port: 3306
 
 production:
   adapter: mysql

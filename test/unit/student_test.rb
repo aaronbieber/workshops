@@ -1,10 +1,19 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
-class StudentTest < Test::Unit::TestCase
-  fixtures :students
+class StudentTest < ActiveSupport::TestCase
+  context 'Student' do
 
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+    should "not validate without a name" do
+      @student = Factory.build(:student)
+      @student.first_name = ''
+      assert !@student.valid?
+    end
+
+    should "not validate without an address" do
+      @student = Factory.build(:student)
+      @student.address1 = ''
+      assert !@student.valid?
+    end
+
   end
 end

@@ -16,7 +16,8 @@ class Notifier < ActionMailer::Base
     subject "#{user.first_name} #{user.last_name} registered for #{workshop.name}!"
 
     body  :user => user,
-          :workshop_name => workshop.name
+          :workshop_name => workshop.name,
+          :comments => user.registrants.find_by_workshop_id(workshop.id).comments
   end
 
   def forgot_password(user, newpass)

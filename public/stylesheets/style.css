@@ -418,12 +418,12 @@ body {
 }
 
 #splash {
-  background: #E6E9DC url('/images/splash_back.jpg') repeat-x left 30px;
+  background: #E6E9DC url('/images/splash_back.png') repeat-x left 30px;
 }
 
 #splash h1 {
-  background: transparent url('/images/splash.jpg') no-repeat center 30px;
-  height: 528px;
+  background: transparent url('/images/splash.png') no-repeat center 30px;
+  height: 302px;
 }
 
 #splash h1 span {
@@ -493,7 +493,7 @@ div.form_container .form_field span {
 }
 
 div.form_container .form_field textarea {
-  font-size: 1.3em;
+  font-size: 1.5em;
   width: 100%;
 }
 
@@ -715,23 +715,67 @@ table.data tr.off {
   margin-left: 5px;
 }
 
+#featured_badge {
+  float: right;
+  position: relative;
+  margin: -45px -45px 0 0;
+}
 
+#featured {
+  width: 760px;
+  margin: 0 auto;
+  background: transparent url('/images/featured_back.png') repeat top right;
+  padding: 10px 10px 1px;
+}
 
+#featured ul {
+  list-style-type: none;
+}
 
+#featured ul li .one-image {
+  float: left;
+  width: 95px;
+  height: 95px;
+  margin: 0 10px 0 0;
+}
 
+#featured ul li .one-image img {
+  width: 95px;
+  height: 95px;
+}
 
+#featured ul {
+  margin: 0;
+  padding: 0;
+}
 
+#featured ul li {
+  background-color: white;
+  margin: 0 0 10px 0;
+  padding: 10px;
+  border: 1px solid #e5e5e5;
+}
 
+#featured ul li .featured_name {
+  font-size: 2.5em;
+}
 
+#featured ul li .featured_when {
+  font-size: 2em;
+  border-top: 1px solid #b0b2a8;
+  padding-top: 10px;
+  margin-top: 10px;
+}
 
+#featured ul li .featured_when span {
+  color: #8d8d8d;
+  font-style: italic;
+}
 
+#featured ul li .featured_button {
+  text-align: right;
+}
 
-
-
-
-
-
-
-
-
-
+#featured p {
+  margin: 0;
+}

@@ -15,33 +15,35 @@
 
 <body id="ssp">
 
-  <!-- <div id="heading">
-    <h1>
-      <%= link_to "<span>Upcoming Workshops</span>", { :controller => 'upcoming', :action => 'view' } %>
-    </h1>
-  </div> -->
-
   <div id="splash">
-    <h1><span>Our Workshops Make Your Photos Rock</span></h1>
+    <h1><span>Travel. Learn. ArtPhotoWorkshops.com</span></h1>
   </div>
 
-  <!-- <div id="siteLinks">
-    <div id="siteLinksPad">
-      <%= link_to "Log In", { :controller => 'register', :action => 'existing' } %>
-      &bull;
-      <a href="http://www.fisheyegallery.com">Visit Aaron's Gallery</a>
-      &bull;
-      <a href="http://www.curiouslens.com">Visit Chris's Gallery</a>
-    </div>
-  </div> -->
+  <div id="featured">
+    <img src="/images/featured_badge.png" alt="Featured!" id="featured_badge" />
+    <ul>
+      <% @featured.each do |workshop| %>
+        <li>
+          <%= workshop.thumbnail_tag %>
+          <div class="featured_name"><%= workshop.name %></div>
+          <div class="featured_when"><span>Coming up in</span> <%= workshop.when %><span>, with only</span> <%= workshop.max_students-workshop.students_paid.length %> seats left!</div>
+          <div class="featured_button">
+            <p><%= link_to "<img src=\"/images/learn_more.gif\" alt=\"LEARN MORE AND SIGN UP!\" />", {
+                :controller => 'register',
+                :action => 'view',
+                :year => workshop.start_date.year,
+                :month => Date::MONTHNAMES[workshop.start_date.month],
+                :ident => workshop.short_name } %>
+            </p>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 
   <div id="airContentTop"></div>
   <div id="airContent">
-    
-    
     <%= yield %>
-  
-  
   </div>
   <div id="airContentBottom"></div>
 
